@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Estado } from '../model/estado';
 import { EstadoService } from '../services/estado.service';
@@ -20,9 +21,13 @@ export class EstadosComponent implements OnInit {
   
   // datasource
   estados!: MatTableDataSource<Estado>;
-  displayedColumns = ['nome', 'sigla']
+  displayedColumns = ['nome', 'sigla', 'acao']
 
-  constructor(private estadoService: EstadoService) { 
+  constructor(
+    private estadoService: EstadoService,
+    private router: Router,
+    private activateRoute: ActivatedRoute
+  ) { 
     this.estadoService.list().subscribe( (dados) => 
       {this.estados = new MatTableDataSource(dados)});
     // this.estados = estadoService.list();
@@ -34,6 +39,10 @@ export class EstadosComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.estados.filter = filterValue.trim().toLowerCase();
+  }
+
+  onAdd() {
+    this.router.navigate(['new'], {relativeTo: this.activateRoute})
   }
 
 }

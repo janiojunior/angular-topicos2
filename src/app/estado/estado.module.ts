@@ -10,10 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { EstadoFormComponent } from './estado-form/estado-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    EstadosComponent
+    EstadosComponent,
+    EstadoFormComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +27,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ]
 })
 export class EstadoModule { }
