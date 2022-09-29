@@ -1,5 +1,17 @@
 <mat-card>
+
+  <mat-toolbar >
+    <span class="toolbar-center">Estados</span>
+    <button mat-icon-button color="accent">
+      <mat-icon>add_box</mat-icon>
+    </button>
+  </mat-toolbar>
     
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. tocantins" #input>
+  </mat-form-field>
+
     <table mat-table [dataSource]="estados" class="mat-elevation-z8">
       
         <!-- Name Column -->

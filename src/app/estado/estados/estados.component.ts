@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Estado } from '../model/estado';
 import { EstadoService } from '../services/estado.service';
@@ -15,14 +16,24 @@ export class EstadosComponent implements OnInit {
   //   {id: 2, nome: 'Goiás', sigla: 'GO'},
   //   {id: 3, nome: 'São Paulo', sigla: 'SP'}
   // ] 
-  estados: Observable<Estado[]>;
+  //estados: Observable<Estado[]>;
+  
+  // datasource
+  estados!: MatTableDataSource<Estado>;
   displayedColumns = ['nome', 'sigla']
 
   constructor(private estadoService: EstadoService) { 
-    this.estados = estadoService.list();
+    this.estadoService.list().subscribe( (dados) => 
+      {this.estados = new MatTableDataSource(dados)});
+    // this.estados = estadoService.list();
   }
 
   ngOnInit(): void {
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.estados.filter = filterValue.trim().toLowerCase();
   }
 
 }
