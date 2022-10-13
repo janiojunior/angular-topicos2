@@ -25,16 +25,16 @@
             <th mat-header-cell *matHeaderCellDef> Sigla </th>
             <td mat-cell *matCellDef="let estado"> {{estado.sigla}} </td>
           </ng-container>
-
+          
             <!-- Name Column -->
             <ng-container matColumnDef="acao">
               <th mat-header-cell *matHeaderCellDef> Ação </th>
               <td mat-cell *matCellDef="let estado"> 
                 <button mat-icon-button color="primary">
-                  <mat-icon>edit</mat-icon>
+                  <mat-icon (click)="onEdit(estado)">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn">
-                  <mat-icon>delete</mat-icon>
+                  <mat-icon (click)="onDelete(estado)">delete</mat-icon>
                 </button> 
              </td>
             </ng-container>

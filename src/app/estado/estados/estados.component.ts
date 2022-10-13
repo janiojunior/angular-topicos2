@@ -1,9 +1,15 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { EstadoFormDialogComponent } from '../estado-form-dialog/estado-form-dialog.component';
 import { Estado } from '../model/estado';
 import { EstadoService } from '../services/estado.service';
+
 
 @Component({
   selector: 'app-estados',
@@ -18,7 +24,7 @@ export class EstadosComponent implements OnInit {
   //   {id: 3, nome: 'São Paulo', sigla: 'SP'}
   // ] 
   //estados: Observable<Estado[]>;
-  
+
   // datasource
   estados!: MatTableDataSource<Estado>;
   displayedColumns = ['nome', 'sigla', 'acao']
@@ -26,14 +32,22 @@ export class EstadosComponent implements OnInit {
   constructor(
     private estadoService: EstadoService,
     private router: Router,
-    private activateRoute: ActivatedRoute
-  ) { 
-    this.estadoService.list().subscribe( (dados) => 
-      {this.estados = new MatTableDataSource(dados)});
+    private activateRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {
+    // buscando os estados
+    this.refreshTable();
     // this.estados = estadoService.list();
   }
 
   ngOnInit(): void {
+  }
+
+  refreshTable(): void {
+    this.estadoService.list().subscribe(
+      (dados) => this.estados = new MatTableDataSource(dados)
+    );
   }
 
   applyFilter(event: Event) {
@@ -41,8 +55,62 @@ export class EstadosComponent implements OnInit {
     this.estados.filter = filterValue.trim().toLowerCase();
   }
 
+  private addMessage(message:string) {
+    this.snackBar.open(message, 'fechar', {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center'
+    })
+  }
+
   onAdd() {
-    this.router.navigate(['new'], {relativeTo: this.activateRoute})
+    //this.router.navigate(['new'], {relativeTo: this.activateRoute})
+    const dialogRef = this.dialog.open(EstadoFormDialogComponent, {
+      width: '350px',
+      data: { nome: null, sigla: null },
+    });
+
+    dialogRef.afterClosed().subscribe(estado => {
+      console.log(estado);
+      this.estadoService.save(estado).subscribe(() => {
+        this.refreshTable();
+        this.addMessage("Inclusão realizada com sucesso.")
+      } );
+    });
+  }
+
+  onEdit(estado: Estado) {
+    // copia Deep
+    const estadoClone = JSON.parse(JSON.stringify(estado));
+
+    const dialogRef = this.dialog.open(EstadoFormDialogComponent, {
+      width: '350px',
+      data: estadoClone,
+    });
+
+    dialogRef.afterClosed().subscribe(estado => {
+      console.log(estado);
+      this.estadoService.save(estado).subscribe(() => this.refreshTable());
+    });
+  }
+
+  onDelete(estado: Estado) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Deseja remover o Estado?',
+        confirmButtonLabel: 'Excluir',
+        cancelButtonLabel: 'Cancelar'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.estadoService.delete(estado).subscribe(() => this.refreshTable());
+      }
+    });
+
+
   }
 
 }

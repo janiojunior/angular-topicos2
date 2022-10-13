@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EstadoFormDialogComponent } from './estado-form-dialog/estado-form-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     ReactiveFormsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ]
 })
 export class EstadoModule { }

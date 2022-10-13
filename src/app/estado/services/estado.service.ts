@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Estado } from '../model/estado';
 
 @Injectable({
@@ -11,13 +11,19 @@ export class EstadoService {
 
   constructor(private httpClient: HttpClient) {
 
-   }
+  }
 
-   public list() {
+  public list() {
     return this.httpClient.get<Estado[]>(this.ENDPOINT);
-   }
+  }
 
-   public save(estado: Estado) {
-    return this.httpClient.post<Estado>(this.ENDPOINT, estado);
-   }
+  public save(estado: Estado) {
+    if (estado.id == null) 
+      return this.httpClient.post<Estado>(this.ENDPOINT, estado);
+    return this.httpClient.put<Estado>(this.ENDPOINT +'/'+ estado.id, estado);
+  }
+
+  public delete(estado: Estado) {
+    return this.httpClient.delete<Estado>(this.ENDPOINT +'/'+ estado.id);
+  }
 }
