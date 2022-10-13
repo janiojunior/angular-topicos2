@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Cadastro de Estado</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Nome</mat-label>
+    <input cdkFocusInitial matInput [(ngModel)]="data.nome">
+  </mat-form-field>
+</div>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Sigla</mat-label>
+    <input matInput [(ngModel)]="data.sigla">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="data">Salvar</button>
+    <button mat-button (click)="onCancel()">Cancelar</button>
+</div>

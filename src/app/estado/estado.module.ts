@@ -8,15 +8,19 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { EstadoFormComponent } from './estado-form/estado-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EstadoFormDialogComponent } from './estado-form-dialog/estado-form-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     EstadosComponent,
-    EstadoFormComponent
+    EstadoFormComponent,
+    EstadoFormDialogComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    FormsModule
   ]
 })
 export class EstadoModule { }
