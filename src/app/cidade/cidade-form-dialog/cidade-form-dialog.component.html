@@ -1,4 +1,27 @@
-<h1 mat-dialog-title class="center">Cadastro de Cidade</h1>
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Estado</mat-label>
+    <input type="text"
+           placeholder="Selecione um Estado"
+           aria-label="Number"
+           matInput
+           required
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option.nome}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+
+
+
+
+
+<!-- <h1 mat-dialog-title class="center">Cadastro de Cidade</h1>
 <div mat-dialog-content>
   <mat-form-field appearance="fill" style="width: 100%;">
     <mat-label>Nome</mat-label>
@@ -8,4 +31,4 @@
 <div mat-dialog-actions align="center">
     <button mat-raised-button color="primary" [mat-dialog-close]="data">Salvar</button>
     <button mat-raised-button (click)="onCancel()">Cancelar</button>
-</div>
+</div> -->

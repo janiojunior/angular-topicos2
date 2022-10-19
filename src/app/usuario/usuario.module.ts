@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CidadeRoutingModule } from './cidade-routing.module';
-import { CidadesComponent } from './cidades/cidades.component';
+import { UsuarioRoutingModule } from './usuario-routing.module';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuarioFormDialogComponent } from './usuario-form-dialog/usuario-form-dialog.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
@@ -15,17 +16,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { CidadeFormDialogComponent } from './cidade-form-dialog/cidade-form-dialog.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
-    CidadesComponent,
-    CidadeFormDialogComponent
+    UsuariosComponent,
+    UsuarioFormDialogComponent
   ],
   imports: [
     CommonModule,
-    CidadeRoutingModule,
+    UsuarioRoutingModule,
     MatCardModule,
     MatTableModule,
     MatFormFieldModule,
@@ -36,8 +35,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ReactiveFormsModule,
     MatDialogModule,
     FormsModule,
-    MatSnackBarModule,
-    MatAutocompleteModule
+    MatSnackBarModule
   ]
 })
-export class CidadeModule { }
+export class UsuarioModule { }
