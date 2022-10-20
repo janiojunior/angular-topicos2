@@ -17,6 +17,15 @@
         <input cdkFocusInitial matInput [(ngModel)]="data.senha">
     </mat-form-field>
 </div>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Cidade</mat-label>
+      <input cdkFocusInitial matInput readonly="true" [(ngModel)]="data.cidade.nome">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="openConsultaCidadeDialog()">
+        <mat-icon>search</mat-icon>
+      </button>
+  </mat-form-field>
+</div>
 <div mat-dialog-actions align="center">
     <button mat-raised-button color="primary" [mat-dialog-close]="data">Salvar</button>
     <button mat-raised-button (click)="onCancel()">Cancelar</button>

@@ -17,11 +17,13 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CidadeFormDialogComponent } from './cidade-form-dialog/cidade-form-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ConsultaCidadeDialogComponent } from './consulta-cidade-dialog/consulta-cidade-dialog.component';
 
 @NgModule({
   declarations: [
     CidadesComponent,
-    CidadeFormDialogComponent
+    CidadeFormDialogComponent,
+    ConsultaCidadeDialogComponent
   ],
   imports: [
     CommonModule,

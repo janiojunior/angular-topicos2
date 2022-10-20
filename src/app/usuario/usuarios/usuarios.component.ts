@@ -58,7 +58,7 @@ export class UsuariosComponent implements OnInit {
     //this.router.navigate(['new'], {relativeTo: this.activateRoute})
     const dialogRef = this.dialog.open(UsuarioFormDialogComponent, {
       width: '350px',
-      data: { nome: null, sigla: null },
+      data: { nome: null, login: null, senha: null, cidade: {nome: null} },
     });
 
     dialogRef.afterClosed().subscribe(usuario => {

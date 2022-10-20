@@ -17,8 +17,12 @@ export class EstadoService {
     return this.httpClient.get<Estado[]>(this.ENDPOINT);
   }
 
+  public search(valor: string) {
+    return this.httpClient.get<Estado[]>(this.ENDPOINT+'/search/'+ valor);
+  }
+
   public save(estado: Estado) {
-    if (estado.id == null) 
+    if (estado.id == null)
       return this.httpClient.post<Estado>(this.ENDPOINT, estado);
     return this.httpClient.put<Estado>(this.ENDPOINT +'/'+ estado.id, estado);
   }

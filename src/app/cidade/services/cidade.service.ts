@@ -17,10 +17,21 @@ export class CidadeService {
     return this.httpClient.get<Cidade[]>(this.ENDPOINT);
   }
 
+  public search(valor: string) {
+    return this.httpClient.get<Cidade[]>(this.ENDPOINT+'/search/'+ valor);
+  }
+
+
   public save(cidade: Cidade) {
+    const obj = {
+      id: cidade.id,
+      nome: cidade.nome,
+      idEstado: cidade.estado.id
+    }
+
     if (cidade.id == null)
-      return this.httpClient.post<Cidade>(this.ENDPOINT, cidade);
-    return this.httpClient.put<Cidade>(this.ENDPOINT +'/'+ cidade.id, cidade);
+      return this.httpClient.post<Cidade>(this.ENDPOINT, obj);
+    return this.httpClient.put<Cidade>(this.ENDPOINT +'/'+ cidade.id, obj);
   }
 
   public delete(cidade: Cidade) {

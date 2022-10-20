@@ -18,9 +18,18 @@ export class UsuarioService {
   }
 
   public save(usuario: Usuario) {
-    if (usuario.id == null) 
-      return this.httpClient.post<Usuario>(this.ENDPOINT, usuario);
-    return this.httpClient.put<Usuario>(this.ENDPOINT +'/'+ usuario.id, usuario);
+    const obj = {
+      id: usuario.id,
+      nome: usuario.nome,
+      login: usuario.login,
+      senha: usuario.senha,
+      idCidade: usuario.cidade.id
+    }
+
+
+    if (usuario.id == null)
+      return this.httpClient.post<Usuario>(this.ENDPOINT, obj);
+    return this.httpClient.put<Usuario>(this.ENDPOINT +'/'+ usuario.id, obj);
   }
 
   public delete(usuario: Usuario) {
