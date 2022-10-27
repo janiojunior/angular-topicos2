@@ -62,11 +62,14 @@ export class UsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(usuario => {
+      if (usuario == undefined) 
+        return ;
       console.log(usuario);
       this.usuarioService.save(usuario).subscribe(() => {
         this.refreshTable();
         this.addMessage("Inclusão realizada com sucesso.")
       });
+      
     });
   }
 
@@ -80,6 +83,8 @@ export class UsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(usuario => {
+      if (usuario == undefined) 
+      return ;
       console.log(usuario);
       this.usuarioService.save(usuario).subscribe(() => this.refreshTable());
     });

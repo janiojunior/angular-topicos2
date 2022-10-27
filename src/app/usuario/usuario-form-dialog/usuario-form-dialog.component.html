@@ -1,32 +1,42 @@
 <h1 mat-dialog-title class="center">Cadastro de Usuário</h1>
-<div mat-dialog-content>
+<form [formGroup]="formUsuario" >
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Nome</mat-label>
+            <input 
+                cdkFocusInitial 
+                matInput 
+                formControlName="nome">
+                <mat-error *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+                    <div *ngIf="nome.errors?.['required']">
+                      Campo obrigatório.
+                    </div>
+                </mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Login</mat-label>
+            <input cdkFocusInitial matInput formControlName="login">
+        </mat-form-field>
+    </div>
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Senha</mat-label>
+            <input cdkFocusInitial matInput formControlName="senha" >
+        </mat-form-field>
+    </div>
+    <div mat-dialog-content formGroupName="cidade">
     <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Nome</mat-label>
-        <input cdkFocusInitial matInput [(ngModel)]="data.nome">
+        <mat-label>Cidade</mat-label>
+        <input cdkFocusInitial matInput formControlName="nome" readonly="true" >
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="openConsultaCidadeDialog()">
+            <mat-icon>search</mat-icon>
+        </button>
     </mat-form-field>
-</div>
-<div mat-dialog-content>
-    <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Login</mat-label>
-        <input cdkFocusInitial matInput [(ngModel)]="data.login">
-    </mat-form-field>
-</div>
-<div mat-dialog-content>
-    <mat-form-field appearance="fill" style="width: 100%;">
-        <mat-label>Senha</mat-label>
-        <input cdkFocusInitial matInput [(ngModel)]="data.senha">
-    </mat-form-field>
-</div>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill" style="width: 100%;">
-      <mat-label>Cidade</mat-label>
-      <input cdkFocusInitial matInput readonly="true" [(ngModel)]="data.cidade.nome">
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="openConsultaCidadeDialog()">
-        <mat-icon>search</mat-icon>
-      </button>
-  </mat-form-field>
-</div>
-<div mat-dialog-actions align="center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="data">Salvar</button>
-    <button mat-raised-button (click)="onCancel()">Cancelar</button>
-</div>
+    </div>
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button color="primary" (click)="submit()" >Salvar</button>
+        <button mat-raised-button (click)="onCancel()">Cancelar</button>
+    </div>
+</form>
