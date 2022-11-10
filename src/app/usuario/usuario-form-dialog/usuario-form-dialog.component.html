@@ -1,5 +1,26 @@
 <h1 mat-dialog-title class="center">Cadastro de Usuário</h1>
 <form [formGroup]="formUsuario" >
+
+    <button
+    style="width: 100%;"
+    mat-button
+    color="primary"
+    (click)="fileInput.click()">
+      <!-- <mat-icon>image_search</mat-icon> -->
+      <div class="imgcontainer">
+        <img *ngIf="preview" [src]="preview" class="avatar">
+        <img *ngIf="!preview" src="assets/images/default_user.jpg" class="avatar">
+      </div>
+  </button>
+
+    <input
+    #fileInput
+    formControlName="imagemFile"
+    hidden
+    type="file"
+    accept="image/*"
+    (change)="handleFile($event.target)">
+
     <div mat-dialog-content>
         <mat-form-field appearance="fill" style="width: 100%;">
             <mat-label>Nome</mat-label>

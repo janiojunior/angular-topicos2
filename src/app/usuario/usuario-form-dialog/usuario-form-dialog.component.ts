@@ -12,6 +12,9 @@ import { Usuario } from '../model/usuario';
 export class UsuarioFormDialogComponent implements OnInit {
   formUsuario!: FormGroup;
 
+  imagemFile!: File;
+  preview!: string;
+
   constructor(
     public dialogRef: MatDialogRef<UsuarioFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Usuario,
@@ -32,7 +35,9 @@ export class UsuarioFormDialogComponent implements OnInit {
       cidade: new FormGroup({
         id: new FormControl(usuario.cidade.id),
         nome: new FormControl(usuario.cidade.nome)
-      })
+      }),
+      imagemFile: new FormControl(),
+      nomeFile: new FormControl()
     })
   }
 
@@ -64,5 +69,10 @@ export class UsuarioFormDialogComponent implements OnInit {
       })
     });
   }
+
+  handleFile(target : any) {
+    
+  }
+
 
 }
