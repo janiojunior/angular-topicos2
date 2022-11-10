@@ -48,7 +48,11 @@ export class UsuarioFormDialogComponent implements OnInit {
   submit() {
     if (this.formUsuario.invalid)
       return;
-    return this.dialogRef.close(this.formUsuario.value);
+    const usuario = this.formUsuario.value;
+    usuario.imageFile = this.imagemFile;
+    usuario.nomeFile = this.imagemFile.name;
+
+    return this.dialogRef.close(usuario);
   }
 
   get nome() {
@@ -71,7 +75,18 @@ export class UsuarioFormDialogComponent implements OnInit {
   }
 
   handleFile(target : any) {
-    
+      if (target instanceof EventTarget) {
+        let element = target as HTMLInputElement;
+        let files = element.files;
+        if (files) {
+          this.imagemFile = files[0];
+        }
+      }
+      // gerando o preview da imagem
+      const reader = new FileReader();
+      // convertendo em base 64
+      reader.onload = (event:any) => this.preview = event.target.result;
+      reader.readAsDataURL(this.imagemFile);
   }
 
 

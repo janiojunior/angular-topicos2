@@ -18,6 +18,23 @@ export class UsuarioService {
   }
 
   public save(usuario: Usuario) {
+    const formData = new FormData();
+    formData.append('nome', usuario.nome);
+    formData.append('login', usuario.login);
+    formData.append('senha', usuario.senha);
+    formData.append('idCidade', String(usuario.cidade.id));
+    
+    formData.append('imagem', usuario.imageFile);
+    formData.append('nomeImagem', usuario.nomeFile);
+
+      return this.httpClient.post(this.ENDPOINT+'/postupload', formData);
+  }
+
+  public delete(usuario: Usuario) {
+    return this.httpClient.delete<Usuario>(this.ENDPOINT +'/'+ usuario.id);
+  }
+
+  public saveAntigo(usuario: Usuario) {
     const obj = {
       id: usuario.id,
       nome: usuario.nome,
@@ -25,14 +42,5 @@ export class UsuarioService {
       senha: usuario.senha,
       idCidade: usuario.cidade.id
     }
-
-
-    if (usuario.id == null)
-      return this.httpClient.post<Usuario>(this.ENDPOINT, obj);
-    return this.httpClient.put<Usuario>(this.ENDPOINT +'/'+ usuario.id, obj);
-  }
-
-  public delete(usuario: Usuario) {
-    return this.httpClient.delete<Usuario>(this.ENDPOINT +'/'+ usuario.id);
   }
 }

@@ -6,6 +6,8 @@ export interface Usuario {
     login: string;
     senha: string;
     cidade: Cidade;
+    imageFile: File;
+    nomeFile: string;
 }
 
 
