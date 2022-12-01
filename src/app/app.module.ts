@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthInterceptor } from './autenticacao/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

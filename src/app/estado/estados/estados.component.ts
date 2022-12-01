@@ -1,4 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,7 +23,7 @@ export class EstadosComponent implements OnInit {
   //   {id: 1, nome: 'Tocantins', sigla: 'TO'},
   //   {id: 2, nome: 'Goiás', sigla: 'GO'},
   //   {id: 3, nome: 'São Paulo', sigla: 'SP'}
-  // ] 
+  // ]
   //estados: Observable<Estado[]>;
 
   // datasource
@@ -72,12 +73,24 @@ export class EstadosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(estado => {
       console.log(estado);
-      this.estadoService.save(estado).subscribe(() => {
-        this.refreshTable();
-        this.addMessage("Inclusão realizada com sucesso.")
-      } );
+      this.estadoService.save(estado).subscribe({
+        next: () => {
+          this.refreshTable();
+          this.addMessage("Inclusão realizada com sucesso.")
+        },
+        error: (erro) => {
+          this.addMessage("Problema ao Incluir. " + (erro as HttpErrorResponse).statusText)
+        }
+      });
+
+
+
+
+
     });
   }
+
+
 
   onEdit(estado: Estado) {
     // copia Deep
