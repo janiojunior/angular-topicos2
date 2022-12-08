@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private loginService: LoginService,
-      private formBuilder: FormBuilder) {
+      private formBuilder: FormBuilder,
+      private router: Router) {
 
     this.form = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email, Validators.minLength(3)]),
@@ -33,7 +35,8 @@ export class LoginComponent implements OnInit {
       .autenticar(this.form.get("email")?.value, this.form.get("senha")?.value)
       .subscribe({
         next: () => {
-            console.log("Autenticação com sucesso.");
+            //console.log("Autenticação com sucesso.");
+            this.router.navigateByUrl('/usuario')
           },
         error: (erro) => {
           alert('Usuário ou senha inválido');

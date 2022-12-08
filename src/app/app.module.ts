@@ -10,11 +10,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthInterceptor } from './autenticacao/interceptors/auth.interceptor';
+import { UnauathorizedInterceptor } from './autenticacao/interceptors/unauathorized.interceptor';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,10 +24,11 @@ import { AuthInterceptor } from './autenticacao/interceptors/auth.interceptor';
     BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: UnauathorizedInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

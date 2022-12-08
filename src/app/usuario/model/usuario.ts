@@ -7,7 +7,7 @@ export interface Usuario {
     senha: string;
     cidade: Cidade;
     imageFile: File;
-    nomeFile: string;
+    nomeImagem: string;
 }
 
 

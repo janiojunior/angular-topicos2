@@ -17,7 +17,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.tokenService.getToken();
-    console.log(token);
     if (token) {
       request = request.clone({
         url:  request.url,
@@ -26,7 +25,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-    console.log(request);
     return next.handle(request);
   }
 }

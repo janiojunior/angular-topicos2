@@ -20,7 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     UsuariosComponent,
-    UsuarioFormDialogComponent
+    UsuarioFormDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     MatDialogModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ]
 })
 export class UsuarioModule { }

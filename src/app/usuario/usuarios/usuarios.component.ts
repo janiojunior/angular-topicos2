@@ -9,6 +9,7 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 import { Usuario } from '../model/usuario';
 import { UsuarioService } from '../services/usuario.service';
 import { UsuarioFormDialogComponent } from '../usuario-form-dialog/usuario-form-dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -18,21 +19,27 @@ export class UsuariosComponent implements OnInit {
 
   // datasource
   usuarios!: MatTableDataSource<Usuario>;
-  displayedColumns = ['nome', 'login', 'senha', 'acao']
+  displayedColumns = [ 'imageUrl', 'nome', 'login', 'senha', 'acao']
 
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
     private activateRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sanitizer: DomSanitizer
   ) {
     // buscando os usuarios
     this.refreshTable();
     // this.usuarios = usuarioService.list();
   }
+  thumbnail:any;
 
   ngOnInit(): void {
+  }
+
+  getImagem(nomeImagem: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(this.usuarioService.getUrlImagem(nomeImagem));
   }
 
   refreshTable(): void {
@@ -62,14 +69,14 @@ export class UsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(usuario => {
-      if (usuario == undefined) 
+      if (usuario == undefined)
         return ;
       console.log(usuario);
       this.usuarioService.save(usuario).subscribe(() => {
         this.refreshTable();
         this.addMessage("Inclusão realizada com sucesso.")
       });
-      
+
     });
   }
 
@@ -83,7 +90,7 @@ export class UsuariosComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(usuario => {
-      if (usuario == undefined) 
+      if (usuario == undefined)
       return ;
       console.log(usuario);
       this.usuarioService.save(usuario).subscribe(() => this.refreshTable());
@@ -108,3 +115,4 @@ export class UsuariosComponent implements OnInit {
 
   }
 }
+

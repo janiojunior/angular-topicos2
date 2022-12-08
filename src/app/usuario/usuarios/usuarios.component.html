@@ -12,12 +12,24 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. tocantins" #input>
     </mat-form-field>
 
+
+
     <table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="imageUrl">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let data">
+            <div class="imgcontainer">
+              <img width="90%" [src]="getImagem(data.nomeImagem)" >
+            </div>
+          </td>
+        </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="nome">
             <th mat-header-cell *matHeaderCellDef> Nome </th>
             <td mat-cell *matCellDef="let data"> {{data.nome}} </td>
+
         </ng-container>
 
         <!-- Name Column -->

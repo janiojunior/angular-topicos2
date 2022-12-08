@@ -11,3 +11,8 @@ mat-form-field {
     flex: 1 1 auto;
     text-align: center;
 }
+
+.mat-column-imageUrl {
+
+  width: 100px !important;
+}

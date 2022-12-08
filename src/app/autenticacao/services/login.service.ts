@@ -31,7 +31,7 @@ export class LoginService {
     return this.httpClient.post(this.ENDPOINT, obj, {observe: 'response'})
     .pipe(tap((res) => {
       const token = res.headers.get('Authorization') ?? '';
-      alert('Token: '+res.headers.get('Authorization'));
+      // alert('Token: '+res.headers.get('Authorization'));
       this.salvarToken(token);
     })
     );
