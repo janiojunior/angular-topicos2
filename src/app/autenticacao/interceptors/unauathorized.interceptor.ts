@@ -25,7 +25,9 @@ export class UnauathorizedInterceptor implements HttpInterceptor {
       next: ()=> {},
       error: (error:any) => {
         if (error instanceof HttpErrorResponse) {
-          if (error.status == 401) {
+          const listOfErrors = new Array(401, 403);
+          // se existe na lista de erros
+          if (listOfErrors.indexOf(error.status) > -1) {
             this.router.navigateByUrl('/autenticacao')
           } else {
             return;

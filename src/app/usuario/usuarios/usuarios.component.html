@@ -20,7 +20,8 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let data">
             <div class="imgcontainer">
-              <img width="90%" [src]="getImagem(data.nomeImagem)" >
+              <img *ngIf="data.nomeImagem" width="90%" [src]="getImagem(data.nomeImagem)" >
+              <img *ngIf="!data.nomeImagem" width="90%" src="assets/images/default_user.jpg" >
             </div>
           </td>
         </ng-container>
